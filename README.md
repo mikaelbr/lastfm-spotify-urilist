@@ -2,7 +2,7 @@
 
 __A work in progress for trying to fork out a module from the [Simplify Play Button project](https://github.com/mikaelbr/simplify-playbutton).__
 
-A easy way of getting a list of Spotify URIs based on Last.fm data (top/loved tracks and weekly chart list of tracks).
+An easy way of getting a list of Spotify URIs based on Last.fm data (top/loved tracks and weekly chart list of tracks).
 
 ## Getting Started
 Install the module with: `npm install lastfm-spotify-urilist`
