@@ -1,0 +1,41 @@
+{
+  "name": "lastfm-spotify-urilist",
+  "description": "A easy way of getting a list of Spotify URIs based on Last.fm data",
+  "version": "0.1.0",
+  "homepage": "https://github.com/mikaelbrevik/lastfm-spotify-urilist",
+  "author": {
+    "name": "Mikael Brevik",
+    "email": "mikaelbre@gmail.com",
+    "url": "http://mikaelb.net"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mikaelbrevik/lastfm-spotify-urilist.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mikaelbrevik/lastfm-spotify-urilist/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/mikaelbrevik/lastfm-spotify-urilist/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "lib/lastfm-spotify-urilist",
+  "engines": {
+    "node": "~0.6.7"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "async": "~0.1.18",
+    "spotify": "~0.2.0",
+    "lastfm": "~0.8.1",
+    "underscore": "~1.3.3"
+  },
+  "devDependencies": {
+    "grunt": "~0.3.8"
+  },
+  "keywords": []
+}
