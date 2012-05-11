@@ -59,6 +59,7 @@ describe("AJAX Calls", function () {
     });
   });
 
+
   it("should be able to get top tracks", function(done) {
     spyOn(provider, 'getTopTracks').andCallFake(function (user, period, limit, cb) {
       var res = provider._handleSuccess("toptracks", limit, cb)
@@ -72,7 +73,7 @@ describe("AJAX Calls", function () {
     });
   });
 
-  it("should be able to get weekly tracks", function(done) {
+  it("should be able to get weekly tracks", function (done) {
 
     spyOn(provider, 'getWeeklyChartList').andCallFake(function (user, cb) {
       return cb(null, getFixtureData('spec/fixtures/weeklyTimestamps.json'));
@@ -90,6 +91,58 @@ describe("AJAX Calls", function () {
     });
   });
 
-});
+  it("should trigger pre fetch spotify track hook", function (done) {
 
-// > var lastfm_spotify_urilist = require(process.env.PWD + '/lib/lastfm-spotify-urilist.js');
+    spyOn(provider.hooks, "preFetchTrackURI").andCallThrough();
+
+    provider.searchTrackSpotify("Foo", function (err, data) {
+      expect(provider.hooks.preFetchTrackURI).toHaveBeenCalled();
+      done();
+    });
+
+  });
+
+  it("should be able to run a custom pre fetch spotify track hook", function(done) {
+    provider.hooks.preFetchTrackURI = function (trackName) {
+      return function (callback) {
+        if (trackName == "ShouldBeCached") {
+          return callback(null, "spotify:track:customstring");
+        }
+
+        callback(null, null);
+      };
+    };
+
+    provider.searchTrackSpotify("ShouldBeCached", function (err, data) {
+      expect(data).toBe("spotify:track:customstring");
+      done();
+    });
+  });
+
+  it("should trigger post fetch spotify track hook", function (done) {
+    spyOn(provider.hooks, "postFetchTrackURI").andCallThrough();
+
+    provider.searchTrackSpotify("Foo", function (err, data) {
+      expect(provider.hooks.postFetchTrackURI).toHaveBeenCalled();
+      done();
+    });
+  });
+
+
+  it("should offer a wrapper function for different data sources from Last.fm", function(done) {
+    
+    spyOn(provider, "getURIListLoved");
+    spyOn(provider, "getURIListWeekly");
+    spyOn(provider, "getURIListTop");
+
+    provider.getURIList("top", "username", {}, function () {});
+    provider.getURIList("weekly", "username", {}, function () {});
+    provider.getURIList("loved", "username", {}, function () {});
+
+    expect(provider.getURIListTop).toHaveBeenCalled();
+    expect(provider.getURIListWeekly).toHaveBeenCalled();
+    expect(provider.getURIListLoved).toHaveBeenCalled();
+    done();
+  });
+
+});
