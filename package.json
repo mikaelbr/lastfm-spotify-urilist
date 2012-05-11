@@ -1,7 +1,7 @@
 {
   "name": "lastfm-spotify-urilist",
   "description": "An easy way of getting a list of Spotify URIs based on Last.fm data",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "homepage": "https://github.com/mikaelbr/lastfm-spotify-urilist",
   "author": {
     "name": "Mikael Brevik",
